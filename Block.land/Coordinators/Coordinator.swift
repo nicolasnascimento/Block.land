@@ -134,3 +134,9 @@ extension Coordinator: EntityManagerDelegate {
         print("Should display warning or attempt correction")
     }
 }
+
+extension Coordinator: ItemCollectionDelegate {
+    func itemCollection(_ itemCollection: ItemCollection, didSelect item: BlockComponent.BlockMaterialType) {
+        self.manager.add(entity: Block(type: item))
+    }
+}

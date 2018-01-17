@@ -20,6 +20,7 @@ final class BlockComponent: GKComponent {
         case darkOrange = "darkOrange"
         case darkBrown = "darkBrown"
         
+        // Handy cases
         static var random: BlockMaterialType {
             switch arc4random_uniform(4) {
             case 0: return .lightOrange
@@ -27,6 +28,9 @@ final class BlockComponent: GKComponent {
             case 2: return .darkBrown
             default: return .brown
             }
+        }
+        static var all: [BlockMaterialType] {
+            return [.brown, .lightOrange, .darkBrown, .darkOrange]
         }
     }
     

@@ -25,10 +25,6 @@ final class MainViewController: UIViewController {
         
         // Create coordinator
         self.coordinator = Coordinator(view: self.sceneView)
-        
-        // Debug
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.tap))
-        self.sceneView.addGestureRecognizer(recognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +34,11 @@ final class MainViewController: UIViewController {
         
         // Create Overlay and add its view
         self.overlay = Overlay(with: self.sceneView)
+        
+        // Allow coordinator to properly handle events
+        self.overlay.itemCollection.delegate = coordinator
+        
+        
     }
     
-    @objc func tap() {
-        self.coordinator.manager.add(entity: Block())
-    }
 }

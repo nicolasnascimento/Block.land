@@ -14,11 +14,11 @@ final class Block: GKEntity {
     private let defaultDimension = CGSize3(width: 0.1, height: 0.1, length: 0.1)
     
     // MARK: - Initialization
-    override init() {
+    init(type: BlockComponent.BlockMaterialType) {
         super.init()
         
         // Create the 3D block representation
-        let blockComponent = BlockComponent(dimensions: defaultDimension)
+        let blockComponent = BlockComponent(dimensions: defaultDimension, type: type)
         self.addComponent(blockComponent)
         
         // Add physics to block

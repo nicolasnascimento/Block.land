@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TinyConstraints
 
 final class Overlay {
 
@@ -15,11 +16,28 @@ final class Overlay {
     /// The view in which all other components will be placed
     var view: UIView
     
+    // This will get created after all the view frame is set
+    private(set) var itemCollection: ItemCollection
+    
     // MARK - Initialization
     init(with superView: UIView) {
         
-        // Instatiate view of the same size of superview
+        // Instatiate properties to default values
         self.view = UIView(frame: superView.frame)
+        self.itemCollection = ItemCollection()
+        
+        // Setup View
+        self.setupView(for: superView)
+        
+        // Setup collection view
+        self.itemCollection.setupCollectionView(for: self.view)
+        
+        // Display items
+        self.itemCollection.reload()
+    }
+    
+    // MARK: - Private
+    private func setupView(for superView: UIView) {
         self.view.backgroundColor = .clear
         
         // Debug Layer
@@ -27,19 +45,18 @@ final class Overlay {
             self.view.layer.borderWidth = 1.0
             self.view.layer.borderColor = UIColor.lightGray.cgColor
         #endif
-        
+
         // Add layer view to superView's view hierarchy
         superView.addSubview(self.view)
-        print(self.view.frame)
+        
+        // Avoid unwanted constrainst
         self.view.translatesAutoresizingMaskIntoConstraints = false
         
         // Setup constraints
-        self.view.topAnchor.constraint(equalTo: superView.layoutMarginsGuide.topAnchor).isActive = true
-        self.view.leftAnchor.constraint(equalTo:  superView.layoutMarginsGuide.leftAnchor).isActive = true
-        self.view.rightAnchor.constraint(equalTo: superView.layoutMarginsGuide.rightAnchor).isActive = true
-        self.view.bottomAnchor.constraint(equalTo: superView.layoutMarginsGuide.bottomAnchor).isActive = true
+        self.view.edgesToSuperview()
         
         // Update layout
         self.view.setNeedsLayout()
+        
     }
 }
