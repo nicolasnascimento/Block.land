@@ -41,6 +41,8 @@ final class BlockComponent: GKComponent {
         }
     }
     
+    // The name to be used in the block component node
+    private let name: String = "blockComponentNode"
     
     // MARK: - Initialization
     init(dimensions: CGSize3, type: BlockMaterialType = BlockMaterialType.random, chamferRadius: CGFloat = 0.01) {

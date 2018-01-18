@@ -7,6 +7,7 @@
 //
 
 import SceneKit
+import GameplayKit
 
 extension SCNNode {
     

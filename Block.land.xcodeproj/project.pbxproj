@@ -18,6 +18,7 @@
 		0C178591200E5D21006D44C9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C178590200E5D21006D44C9 /* Environment.swift */; };
 		0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */; };
 		0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00F20111AFC00DA40F9 /* FocusView.swift */; };
+		0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */; };
 		0CF204D0200E6A5E00873B27 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204CF200E6A5E00873B27 /* Block.swift */; };
 		0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D1200E6C0200873B27 /* BlockComponent.swift */; };
 		0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */; };
@@ -41,6 +42,7 @@
 		0C178590200E5D21006D44C9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0C20E00F20111AFC00DA40F9 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableComponent.swift; sourceTree = "<group>"; };
 		0CF204CF200E6A5E00873B27 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		0CF204D1200E6C0200873B27 /* BlockComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockComponent.swift; sourceTree = "<group>"; };
 		0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				0CF204D1200E6C0200873B27 /* BlockComponent.swift */,
 				0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */,
+				0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			files = (
 				0CF204D0200E6A5E00873B27 /* Block.swift in Sources */,
 				0C178591200E5D21006D44C9 /* Environment.swift in Sources */,
+				0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */,
 				0CF204DC200F9CF600873B27 /* SCNNodeExtensions.swift in Sources */,
 				0C178571200E590B006D44C9 /* MainViewController.swift in Sources */,
 				0CF204DF200FA58D00873B27 /* Overlay.swift in Sources */,

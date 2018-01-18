@@ -10,6 +10,8 @@ import UIKit
 
 class FocusView: UIView {
     
+    
+    // MARK: - Public Properties
     enum Status {
         case idle
         case foundObject
@@ -34,6 +36,8 @@ class FocusView: UIView {
             }
         }
     }
+    
+    // MARK: - Override
     
     override func draw(_ rect: CGRect) {
         

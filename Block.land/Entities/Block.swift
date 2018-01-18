@@ -27,10 +27,16 @@ final class Block: GKEntity {
         let blockComponent = BlockComponent(dimensions: defaultDimension, type: type)
         self.addComponent(blockComponent)
         
+        // Allow back reference
+        blockComponent.blockNode.entity = self
+        
         // Add physics to block
         let physicsComponent = PhysicsComponent(node: blockComponent.blockNode, type: .dynamic)
         blockComponent.blockNode.physicsBody = physicsComponent.body
         self.addComponent(physicsComponent)
+        
+        let focusComponent = FocusableComponent(effectNode: blockComponent.blockNode)
+        self.addComponent(focusComponent)
     }
     
     required init?(coder aDecoder: NSCoder) {
