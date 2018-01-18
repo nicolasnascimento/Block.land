@@ -50,11 +50,6 @@ final class Coordinator: NSObject {
         // Add canvas node
         self.canvasNode = self.view?.scene.rootNode.childNode(withName: "canvasNode", recursively: true)!
         self.view?.scene.rootNode.addChildNode(self.canvasNode)
-        
-        // Make sure delegate callbacks will be provided
-        self.view?.delegate = self
-        self.manager.delegate = self
-        (self.view?.parentViewController as? MainViewController)?.overlay.delegate = self
     }
     
     // MARK: - Public Methods
@@ -68,6 +63,11 @@ final class Coordinator: NSObject {
         
         // Run session
         self.view?.session.run(configuration)
+        
+        // Make sure delegate callbacks will be provided
+        self.view?.delegate = self
+        self.manager.delegate = self
+        (self.view?.parentViewController as? MainViewController)?.overlay.delegate = self
     }
     
     // MARK: - Private

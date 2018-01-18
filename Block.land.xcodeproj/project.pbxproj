@@ -17,6 +17,7 @@
 		0C17858F200E5C87006D44C9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17858E200E5C87006D44C9 /* Coordinator.swift */; };
 		0C178591200E5D21006D44C9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C178590200E5D21006D44C9 /* Environment.swift */; };
 		0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */; };
+		0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00F20111AFC00DA40F9 /* FocusView.swift */; };
 		0CF204D0200E6A5E00873B27 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204CF200E6A5E00873B27 /* Block.swift */; };
 		0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D1200E6C0200873B27 /* BlockComponent.swift */; };
 		0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */; };
@@ -39,6 +40,7 @@
 		0C17858E200E5C87006D44C9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0C178590200E5D21006D44C9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		0C20E00F20111AFC00DA40F9 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		0CF204CF200E6A5E00873B27 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		0CF204D1200E6C0200873B27 /* BlockComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockComponent.swift; sourceTree = "<group>"; };
 		0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				0CF204DE200FA58D00873B27 /* Overlay.swift */,
+				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */,
 				0C17858C200E5B7F006D44C9 /* EntityManager.swift in Sources */,
 				0C17856F200E590B006D44C9 /* AppDelegate.swift in Sources */,
+				0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */,
 				0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */,
 				0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */,
 				0CF204DA200F9C0000873B27 /* CoreGraphicsExtensions.swift in Sources */,

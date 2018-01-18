@@ -34,14 +34,22 @@ final class BlockComponent: GKComponent {
         }
     }
     
+    // The type associated with the component
+    var type: BlockMaterialType {
+        didSet {
+            self.blockNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: type.rawValue)
+        }
+    }
+    
+    
     // MARK: - Initialization
     init(dimensions: CGSize3, type: BlockMaterialType = BlockMaterialType.random, chamferRadius: CGFloat = 0.01) {
+        self.type = type
         // Create Geometry
         let geometry = SCNBox(width: dimensions.width, height: dimensions.height, length: dimensions.length, chamferRadius: chamferRadius)
         geometry.firstMaterial?.diffuse.contents = UIImage(named: type.rawValue)        
         geometry.firstMaterial?.normal.contents = UIImage(named: "wood-normal")
         geometry.firstMaterial?.lightingModel = .physicallyBased
-        
         
         // Create node
         self.blockNode = SCNNode(geometry: geometry)
