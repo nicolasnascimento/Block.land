@@ -157,6 +157,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		0C20E0112011292500DA40F9 /* OverlayItems */ = {
+			isa = PBXGroup;
+			children = (
+				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
+			);
+			path = OverlayItems;
+			sourceTree = "<group>";
+		};
 		0CF204D8200F9BF300873B27 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				0CF204DE200FA58D00873B27 /* Overlay.swift */,
-				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
+				0C20E0112011292500DA40F9 /* OverlayItems */,
 			);
 			path = View;
 			sourceTree = "<group>";
