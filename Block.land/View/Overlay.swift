@@ -119,10 +119,6 @@ final class Overlay {
         // Redraw Frame
         self.focusCircle.setNeedsDisplay()
         focusCircle.backgroundColor = UIColor.clear
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.focusCircle.status = .foundObject
-        }
     }
     
     // MARK: - Actions
