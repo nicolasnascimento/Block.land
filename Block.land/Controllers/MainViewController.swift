@@ -34,11 +34,6 @@ final class MainViewController: UIViewController {
         
         // Create Overlay and add its view
         self.overlay = Overlay(with: self.sceneView)
-        
-        // Allow coordinator to properly handle events
-        self.overlay.itemCollection.delegate = coordinator
-        
-        
     }
     
 }
