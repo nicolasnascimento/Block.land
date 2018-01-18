@@ -54,6 +54,7 @@ final class Coordinator: NSObject {
         // Make sure delegate callbacks will be provided
         self.view?.delegate = self
         self.manager.delegate = self
+        (self.view?.parentViewController as? MainViewController)?.overlay.delegate = self
     }
     
     // MARK: - Public Methods
@@ -135,8 +136,12 @@ extension Coordinator: EntityManagerDelegate {
     }
 }
 
-extension Coordinator: ItemCollectionDelegate {
-    func itemCollection(_ itemCollection: ItemCollection, didSelect item: BlockComponent.BlockMaterialType) {
-        self.manager.add(entity: Block(type: item))
+extension Coordinator: OverlayDelegate {
+    func overlay(_ overlay: Overlay, didPressAdd button: UIButton) {
+        
+        // For now, simply add a regular block
+        self.manager.add(entity: Block(type: .random))
+        
     }
+    
 }

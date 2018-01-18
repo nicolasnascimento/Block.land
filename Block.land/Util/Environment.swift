@@ -11,6 +11,15 @@ import Foundation
 // Constants & Default Values
 enum Environment {
     
+    /// Tells wheter the Environment is supposed to use Debug Features
+    static let debugMode: Bool = {
+        #if DEBUG
+            return true
+        #else
+            return false
+        #endif
+    }()
+    
     // The folders contained in the app
     enum Folder {
         static let assets3DFolder = "Assets-3D.scnassets/"

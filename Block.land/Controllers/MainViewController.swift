@@ -34,6 +34,9 @@ final class MainViewController: UIViewController {
         
         // Create Overlay and add its view
         self.overlay = Overlay(with: self.sceneView)
+        
+        // Assure Callbacks will get providede to coordinator
+        self.overlay.delegate = self.coordinator
     }
     
 }

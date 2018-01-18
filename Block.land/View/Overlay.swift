@@ -9,13 +9,13 @@
 import UIKit
 import TinyConstraints
 
-
+// Implement these methods to get callbacks when button in the overlay are pressed
 protocol OverlayDelegate: class {
     func overlay(_ overlay: Overlay, didPressAdd button: UIButton)
 }
 
 final class Overlay {
-
+    
     // MARK: - Public
     
     // The delegate to which overlay related events will be sent
@@ -25,6 +25,7 @@ final class Overlay {
     var view: UIView
     
     // MARK: - Private
+    
     /// The button used to perform add action
     private var addButton: UIButton
     
@@ -48,10 +49,10 @@ final class Overlay {
         self.view.backgroundColor = .clear
         
         // Debug Layer
-        #if DEBUG
+        if( Environment.debugMode ) {
             self.view.layer.borderWidth = 1.0
             self.view.layer.borderColor = UIColor.lightGray.cgColor
-        #endif
+        }
 
         // Add layer view to superView's view hierarchy
         superView.addSubview(self.view)
@@ -63,8 +64,7 @@ final class Overlay {
         self.view.edgesToSuperview()
         
         // Update layout
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        self.view.updateLayout()
     }
     private func setupAddButton(for superView: UIView) {
         // Add layer view to superView's view hierarchy
@@ -87,8 +87,12 @@ final class Overlay {
         self.addButton.bottomToSuperview(offset: -bottomSpacing)
  
         // Update Layout
-        self.addButton.setNeedsLayout()
-        self.addButton.layoutIfNeeded()
+        self.addButton.updateLayout()
         
+        // Setup Delegate callback
+        self.addButton.addTarget(self, action: #selector(self.addButtonDidGetPressed(_:)), for: .touchUpInside)
+    }
+    @objc private func addButtonDidGetPressed(_ addButton: UIButton) {
+        self.delegate?.overlay(self, didPressAdd: addButton)
     }
 }

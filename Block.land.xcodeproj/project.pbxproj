@@ -16,6 +16,7 @@
 		0C17858C200E5B7F006D44C9 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17858B200E5B7F006D44C9 /* EntityManager.swift */; };
 		0C17858F200E5C87006D44C9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17858E200E5C87006D44C9 /* Coordinator.swift */; };
 		0C178591200E5D21006D44C9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C178590200E5D21006D44C9 /* Environment.swift */; };
+		0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */; };
 		0CF204D0200E6A5E00873B27 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204CF200E6A5E00873B27 /* Block.swift */; };
 		0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D1200E6C0200873B27 /* BlockComponent.swift */; };
 		0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */; };
@@ -23,8 +24,6 @@
 		0CF204DC200F9CF600873B27 /* SCNNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204DB200F9CF600873B27 /* SCNNodeExtensions.swift */; };
 		0CF204DF200FA58D00873B27 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204DE200FA58D00873B27 /* Overlay.swift */; };
 		0CF204E3200FB04F00873B27 /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CF204E2200FB04F00873B27 /* TinyConstraints.framework */; };
-		0CF204E6200FB98300873B27 /* ItemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204E5200FB98300873B27 /* ItemCollection.swift */; };
-		0CF204EA200FBB1B00873B27 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204E9200FBB1B00873B27 /* ItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +38,7 @@
 		0C17858B200E5B7F006D44C9 /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		0C17858E200E5C87006D44C9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0C178590200E5D21006D44C9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0CF204CF200E6A5E00873B27 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		0CF204D1200E6C0200873B27 /* BlockComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockComponent.swift; sourceTree = "<group>"; };
 		0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
@@ -46,8 +46,6 @@
 		0CF204DB200F9CF600873B27 /* SCNNodeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNodeExtensions.swift; sourceTree = "<group>"; };
 		0CF204DE200FA58D00873B27 /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		0CF204E2200FB04F00873B27 /* TinyConstraints.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TinyConstraints.framework; path = Carthage/Build/iOS/TinyConstraints.framework; sourceTree = "<group>"; };
-		0CF204E5200FB98300873B27 /* ItemCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollection.swift; sourceTree = "<group>"; };
-		0CF204E9200FBB1B00873B27 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +160,7 @@
 			children = (
 				0CF204D9200F9C0000873B27 /* CoreGraphicsExtensions.swift */,
 				0CF204DB200F9CF600873B27 /* SCNNodeExtensions.swift */,
+				0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				0CF204DE200FA58D00873B27 /* Overlay.swift */,
-				0CF204E8200FBAEF00873B27 /* ItemCollection */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,15 +179,6 @@
 				0CF204E2200FB04F00873B27 /* TinyConstraints.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0CF204E8200FBAEF00873B27 /* ItemCollection */ = {
-			isa = PBXGroup;
-			children = (
-				0CF204E5200FB98300873B27 /* ItemCollection.swift */,
-				0CF204E9200FBB1B00873B27 /* ItemCollectionViewCell.swift */,
-			);
-			path = ItemCollection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,13 +295,12 @@
 				0C178571200E590B006D44C9 /* MainViewController.swift in Sources */,
 				0CF204DF200FA58D00873B27 /* Overlay.swift in Sources */,
 				0C17858F200E5C87006D44C9 /* Coordinator.swift in Sources */,
-				0CF204E6200FB98300873B27 /* ItemCollection.swift in Sources */,
 				0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */,
 				0C17858C200E5B7F006D44C9 /* EntityManager.swift in Sources */,
 				0C17856F200E590B006D44C9 /* AppDelegate.swift in Sources */,
 				0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */,
+				0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */,
 				0CF204DA200F9C0000873B27 /* CoreGraphicsExtensions.swift in Sources */,
-				0CF204EA200FBB1B00873B27 /* ItemCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
