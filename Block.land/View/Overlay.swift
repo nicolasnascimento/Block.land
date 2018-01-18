@@ -29,18 +29,25 @@ final class Overlay {
     /// The button used to perform add action
     private var addButton: UIButton
     
+    /// The view which will be used to provide focus
+    private var focusCircle: FocusView
+    
     // MARK - Initialization
     init(with superView: UIView) {
         
         // Instatiate properties to default values
         self.view = UIView(frame: .zero)
         self.addButton = UIButton(frame: .zero)
+        self.focusCircle = FocusView(frame: .zero)
         
         // Setup View
         self.setupView(for: superView)
         
         // Setup Add Button
         self.setupAddButton(for: self.view)
+        
+        // Setup Focus Circle
+        self.setupFocusCircle(for: self.view)
     }
     
     // MARK: - Private
@@ -89,9 +96,36 @@ final class Overlay {
         // Update Layout
         self.addButton.updateLayout()
         
+        // Update drawing
+        self.addButton.setNeedsDisplay()
+        
         // Setup Delegate callback
         self.addButton.addTarget(self, action: #selector(self.addButtonDidGetPressed(_:)), for: .touchUpInside)
     }
+    private func setupFocusCircle(for superView: UIView) {
+        // Add layer view to superView's view hierarchy
+        superView.addSubview(self.focusCircle)
+        
+        // Control values for setting up layout
+        let referenceSize = CGSize(width: 10, height: 10)
+        
+        // Setup Constraints
+        self.focusCircle.centerInSuperview()
+        self.focusCircle.size(referenceSize)
+        
+        // Update Layout
+        self.focusCircle.updateLayout()
+        
+        // Redraw Frame
+        self.focusCircle.setNeedsDisplay()
+        focusCircle.backgroundColor = UIColor.clear
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.focusCircle.status = .foundObject
+        }
+    }
+    
+    // MARK: - Actions
     @objc private func addButtonDidGetPressed(_ addButton: UIButton) {
         self.delegate?.overlay(self, didPressAdd: addButton)
     }

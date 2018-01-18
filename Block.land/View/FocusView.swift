@@ -1,0 +1,48 @@
+//
+//  FocusView.swift
+//  Block.land
+//
+//  Created by Nicolas Nascimento on 18/01/18.
+//  Copyright © 2018 Nicolas Nascimento. All rights reserved.
+//
+
+import UIKit
+
+class FocusView: UIView {
+    
+    enum Status {
+        case idle
+        case foundObject
+    }
+    
+    // Status for Focus View
+    var animationDuration = 0.1
+    var status: Status = .idle {
+        willSet {
+            if newValue != self.status {
+                switch newValue {
+                case .foundObject:
+                    UIView.animate(withDuration: self.animationDuration) { [weak self] in
+                        self?.transform = CGAffineTransform.identity.scaledBy(x: 1.2, y: 1.2)
+                    }
+                    UIView.setAnimationCurve(.easeOut)
+                case .idle:
+                    UIView.animate(withDuration: self.animationDuration) { [weak self] in
+                        self?.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+                    }
+                }
+            }
+        }
+    }
+    
+    override func draw(_ rect: CGRect) {
+        
+        // Corner radius
+        self.layer.cornerRadius = rect.size.height/2
+        
+        // Border
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.white.cgColor
+    }
+    
+}

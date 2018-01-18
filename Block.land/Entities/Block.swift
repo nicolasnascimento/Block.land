@@ -13,6 +13,12 @@ final class Block: GKEntity {
     // The default size of the block
     private let defaultDimension = CGSize3(width: 0.1, height: 0.1, length: 0.1)
     
+    // The type associated with the block
+    var type: BlockComponent.BlockMaterialType {
+        get { return self.component(ofType: BlockComponent.self)!.type }
+        set { self.component(ofType: BlockComponent.self)!.type = newValue }
+    }
+    
     // MARK: - Initialization
     init(type: BlockComponent.BlockMaterialType) {
         super.init()
