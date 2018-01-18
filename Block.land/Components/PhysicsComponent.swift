@@ -15,6 +15,7 @@ final class PhysicsComponent: GKComponent {
     init(node: SCNNode, type: SCNPhysicsBodyType = .dynamic) {
         self.body = SCNPhysicsBody(type: type, shape: SCNPhysicsShape(geometry: node.geometry!, options: [:]))
         self.body.isAffectedByGravity = true
+        self.body.mass = 10.0
         
         super.init()
     }

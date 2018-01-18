@@ -27,6 +27,9 @@ final class Coordinator: NSObject {
     // A flag to indicate if plane was already detected
     private var planeAnchor: ARPlaneAnchor?
     private var planeIterations = 1
+    private var midPoint: CGPoint = .zero
+    private var currentFocusedComponent: FocusableComponent? = nil
+    
     
     // MARK: - Initialization
     init(view: ARSCNView) {
@@ -39,6 +42,8 @@ final class Coordinator: NSObject {
         
         // Assign view weak reference
         self.view = view
+        
+        self.midPoint = CGPoint(x: self.view!.bounds.size.width*0.5, y: self.view!.bounds.size.height*0.5)
         
         // Configuration
         self.view?.showsStatistics = true
@@ -111,6 +116,28 @@ extension Coordinator: ARSCNViewDelegate {
         
         // Perform Apropriate handling of plane detected
         self.handlePlaneAnchorDetection(for: newPlaneAnchor)
+    }
+    
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        
+        // Hit test and only used node which is the top most position
+        if let firstResult = renderer.hitTest(midPoint, options: [:]).first {
+            let focusComponent = firstResult.node.entity?.component(ofType: FocusableComponent.self)
+            
+            if( focusComponent != self.currentFocusedComponent ) {
+                
+                // Remove focus from old element
+                self.currentFocusedComponent?.state = .notFocused
+                
+                // Add focus to new element
+                focusComponent?.state = .focused
+                
+                // Set reference
+                self.currentFocusedComponent = focusComponent
+            }
+        }
+        
     }
     
 }
