@@ -32,6 +32,9 @@ final class Overlay {
     /// The view which will be used to provide focus
     private var focusCircle: FocusView
     
+    /// The view which will be used for displaying block options
+    private var blockOptios: BlockOptionsView
+    
     // MARK - Initialization
     init(with superView: UIView) {
         
@@ -39,6 +42,7 @@ final class Overlay {
         self.view = UIView(frame: .zero)
         self.addButton = UIButton(frame: .zero)
         self.focusCircle = FocusView(frame: .zero)
+        self.blockOptios = BlockOptionsView(frame: .zero)
         
         // Setup View
         self.setupView(for: superView)
@@ -48,6 +52,10 @@ final class Overlay {
         
         // Setup Focus Circle
         self.setupFocusCircle(for: self.view)
+        
+        // Setup Block Options
+        self.setupBlockOptions(for: self.view)
+        
     }
     
     // MARK: - Private
@@ -118,8 +126,37 @@ final class Overlay {
         
         // Redraw Frame
         self.focusCircle.setNeedsDisplay()
-        focusCircle.backgroundColor = UIColor.clear
+        self.focusCircle.backgroundColor = UIColor.clear
     }
+    private func setupBlockOptions(for superView: UIView) {
+        // Add layer view to superView's view hierarchy
+        superView.addSubview(self.blockOptios)
+        
+        // Avoid unwanted constraints
+        self.blockOptios.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Setup buttons
+        self.blockOptios.setup()
+        
+        // Control values for setting up layout
+        let heightMultiplier: CGFloat = 0.1
+        let widthMultiplier: CGFloat = 1.0
+        let bottomSpacing: CGFloat = superView.frame.height*heightMultiplier*0.25
+        
+        // Setup Constrains
+        self.blockOptios.heightToSuperview(multiplier: heightMultiplier)
+        self.blockOptios.widthToSuperview(multiplier: widthMultiplier)
+        self.blockOptios.centerX(to: superView)
+        self.blockOptios.bottomToSuperview(offset: -bottomSpacing)
+        
+        // Update Layout
+        self.blockOptios.updateLayout()
+    
+        // Setup Default State
+        self.blockOptios.isDisplaying = true
+        self.blockOptios.backgroundColor = .clear
+    }
+    
     
     // MARK: - Actions
     @objc private func addButtonDidGetPressed(_ addButton: UIButton) {

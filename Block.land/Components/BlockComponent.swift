@@ -43,10 +43,12 @@ final class BlockComponent: GKComponent {
     
     // The name to be used in the block component node
     private let name: String = "blockComponentNode"
+    private let dimensions: CGSize3
     
     // MARK: - Initialization
     init(dimensions: CGSize3, type: BlockMaterialType = BlockMaterialType.random, chamferRadius: CGFloat = 0.01) {
         self.type = type
+        self.dimensions = dimensions
         // Create Geometry
         let geometry = SCNBox(width: dimensions.width, height: dimensions.height, length: dimensions.length, chamferRadius: chamferRadius)
         geometry.firstMaterial?.diffuse.contents = UIImage(named: type.rawValue)        
@@ -62,7 +64,5 @@ final class BlockComponent: GKComponent {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
 }

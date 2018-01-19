@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1587A8201274B000C2C26F /* BlockOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1587A7201274B000C2C26F /* BlockOptionsView.swift */; };
 		0C17856F200E590B006D44C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17856E200E590B006D44C9 /* AppDelegate.swift */; };
 		0C178571200E590B006D44C9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C178570200E590B006D44C9 /* MainViewController.swift */; };
 		0C178574200E590B006D44C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C178572200E590B006D44C9 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C1587A7201274B000C2C26F /* BlockOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockOptionsView.swift; sourceTree = "<group>"; };
 		0C17856B200E590B006D44C9 /* Block.land.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Block.land.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C17856E200E590B006D44C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C178570200E590B006D44C9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -160,12 +162,13 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		0C20E0112011292500DA40F9 /* OverlayItems */ = {
+		0C20E0112011292500DA40F9 /* Items */ = {
 			isa = PBXGroup;
 			children = (
 				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
+				0C1587A7201274B000C2C26F /* BlockOptionsView.swift */,
 			);
-			path = OverlayItems;
+			path = Items;
 			sourceTree = "<group>";
 		};
 		0CF204D8200F9BF300873B27 /* Extensions */ = {
@@ -182,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				0CF204DE200FA58D00873B27 /* Overlay.swift */,
-				0C20E0112011292500DA40F9 /* OverlayItems */,
+				0C20E0112011292500DA40F9 /* Items */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C1587A8201274B000C2C26F /* BlockOptionsView.swift in Sources */,
 				0CF204D0200E6A5E00873B27 /* Block.swift in Sources */,
 				0C178591200E5D21006D44C9 /* Environment.swift in Sources */,
 				0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */,
