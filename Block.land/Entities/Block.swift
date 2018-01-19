@@ -20,7 +20,7 @@ final class Block: GKEntity {
     }
     
     // MARK: - Initialization
-    init(type: BlockComponent.BlockMaterialType) {
+    init(type: BlockComponent.BlockMaterialType, at spatialCoordinate: (position: SCNVector3, rotation: SCNVector4)? = nil) {
         super.init()
         
         // Create the 3D block representation
@@ -37,6 +37,13 @@ final class Block: GKEntity {
         
         let focusComponent = FocusableComponent(effectNode: blockComponent.blockNode)
         self.addComponent(focusComponent)
+        
+        // If transform matrix was specified, use it
+        if let coordinate = spatialCoordinate {
+            blockComponent.blockNode.position = coordinate.position
+            blockComponent.blockNode.rotation = coordinate.rotation
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

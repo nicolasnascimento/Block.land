@@ -28,8 +28,11 @@ final class Coordinator: NSObject {
     private var planeAnchor: ARPlaneAnchor?
     private var planeIterations = 1
     private var midPoint: CGPoint = .zero
-    private var currentFocusedComponent: FocusableComponent? = nil
     
+    // Focus
+    private var currentFocusedComponent: FocusableComponent? = nil
+    private var currentFocusedPosition: SCNVector3 = SCNVector3()
+    private var currentFocusedRotation: SCNVector4 = SCNVector4()
     
     // MARK: - Initialization
     init(view: ARSCNView) {
@@ -42,8 +45,6 @@ final class Coordinator: NSObject {
         
         // Assign view weak reference
         self.view = view
-        
-        self.midPoint = CGPoint(x: self.view!.bounds.size.width*0.5, y: self.view!.bounds.size.height*0.5)
         
         
         // Load base world from file
@@ -76,6 +77,9 @@ final class Coordinator: NSObject {
         
         // Run session
         self.view?.session.run(configuration)
+        
+        // Set midPoint
+        self.midPoint = CGPoint(x: self.view!.bounds.size.width*0.5, y: self.view!.bounds.size.height*0.5)
         
         // Make sure delegate callbacks will be provided
         self.view?.delegate = self
@@ -113,6 +117,7 @@ extension Coordinator: ARSCNViewDelegate {
                 print("Detected Plane")
                 print("Setting Transform \(self.canvasNode.position)")
                 self.canvasNode.animatedSet(simdTransform: newPlaneAnchor.transform)
+                self.canvasNode.rotation = SCNVector4()
             }
         }
     }
@@ -130,22 +135,29 @@ extension Coordinator: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         // Hit test and only used node which is the top most position
-        if let firstResult = renderer.hitTest(midPoint, options: [:]).first {
-            let focusComponent = firstResult.node.entity?.component(ofType: FocusableComponent.self)
+        if let firstResult = renderer.hitTest(self.midPoint, options: [:]).first {
             
-            if( focusComponent != self.currentFocusedComponent ) {
+            // This means the only thing in front of the object is a plane
+            if( firstResult.node.geometry is SCNFloor ) {
+                self.currentFocusedPosition = firstResult.worldCoordinates
+//                self.currentFocusedRotation = firstResult.node.rotation
                 
-                // Remove focus from old element
-                self.currentFocusedComponent?.state = .notFocused
+            } else {
+                let focusComponent = firstResult.node.entity?.component(ofType: FocusableComponent.self)
                 
-                // Add focus to new element
-                focusComponent?.state = .focused
-                
-                // Set reference
-                self.currentFocusedComponent = focusComponent
+                if( focusComponent != self.currentFocusedComponent ) {
+                    
+                    // Remove focus from old element
+                    self.currentFocusedComponent?.state = .notFocused
+                    
+                    // Add focus to new element
+                    focusComponent?.state = .focused
+                    
+                    // Set reference
+                    self.currentFocusedComponent = focusComponent
+                }
             }
         }
-        
     }
     
 }
@@ -155,7 +167,10 @@ extension Coordinator: EntityManagerDelegate {
         
         if let blockComponent = entity.component(ofType: BlockComponent.self) {
             print("adding block node")
-            blockComponent.blockNode.position.y += 1.0
+            
+            let cubeSide = fabs(blockComponent.blockNode.boundingBox.max.x - blockComponent.blockNode.boundingBox.min.x)
+            blockComponent.blockNode.position.y += cubeSide
+            
             self.add(blockComponent.blockNode)
         }
     }
@@ -175,7 +190,10 @@ extension Coordinator: OverlayDelegate {
     func overlay(_ overlay: Overlay, didPressAdd button: UIButton) {
         
         // For now, simply add a regular block
-        self.manager.add(entity: Block(type: .random))
+        print(self.currentFocusedPosition)
+        
+        // Add Block
+        self.manager.add(entity: Block(type: .random, at: (position: self.currentFocusedPosition, rotation: self.currentFocusedRotation)))
         
     }
     
