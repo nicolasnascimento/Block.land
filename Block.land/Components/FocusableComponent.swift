@@ -22,19 +22,21 @@ final class FocusableComponent: GKComponent {
             if( newValue != self.state ) {
                 switch newValue {
                 case .focused:
-                    let scale = 1.2
+
+                    // Blink Action
+                    let angularSpeed = CGFloat.pi
+                    let fadeOut = SCNAction.fadeOpacity(to: 0.5, duration: self.animationDuration*0.5)
+                    let fadeIn = SCNAction.fadeOpacity(to: 1.0, duration: self.animationDuration*0.5)
+                    let fade = SCNAction.repeatForever(SCNAction.sequence([fadeOut, fadeIn]))
                     
-                    let height = (self.effectNode.boundingBox.max.y - self.effectNode.boundingBox.min.y)*Float(scale - 1.0)
-                    self.effectNode.position.y += (self.effectNode.boundingBox.max.y - self.effectNode.boundingBox.min.y)*Float(scale - 1.0)
-                    print(height)
-                    
-                    self.effectNode.physicsBody?.resetTransform()
-                    
-                    self.effectNode.scale = SCNVector3(scale, scale, scale)
+                    self.effectNode.runAction(fade, forKey: self.fadeActionKey)
+
                     
                 case .notFocused:
                     
-                    self.effectNode.scale = SCNVector3(1.0, 1.0, 1.0)
+                    // Restore Default values
+                    let fadeIn = SCNAction.fadeIn(duration: self.animationDuration)
+                    self.effectNode.runAction(fadeIn, forKey: self.fadeActionKey)
                 }
             }
         }
@@ -42,7 +44,7 @@ final class FocusableComponent: GKComponent {
     
     // MARK: - Private
     
-    private let scaleActionKey = "scaleActionKey"
+    private let fadeActionKey = "rotationActionKey"
     private var effectNode: SCNNode
     
     

@@ -45,8 +45,6 @@ final class Coordinator: NSObject {
         
         self.midPoint = CGPoint(x: self.view!.bounds.size.width*0.5, y: self.view!.bounds.size.height*0.5)
         
-        // Configuration
-        self.view?.showsStatistics = true
         
         // Load base world from file
         guard let scene = SCNScene(named: Environment.Files.baseWorldScene) else { fatalError("Couldn't load base world scene from file: \(Environment.Files.baseWorldScene)") }
@@ -55,6 +53,16 @@ final class Coordinator: NSObject {
         // Add canvas node
         self.canvasNode = self.view?.scene.rootNode.childNode(withName: "canvasNode", recursively: true)!
         self.view?.scene.rootNode.addChildNode(self.canvasNode)
+        
+        // Debug
+        if( Environment.debugMode ) {
+            
+            // FPS, Node Counte, etc
+            self.view?.showsStatistics = true
+            
+            // Physics
+            self.view?.debugOptions = []
+        }
     }
     
     // MARK: - Public Methods
