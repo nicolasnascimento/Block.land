@@ -30,7 +30,7 @@ final class Coordinator: NSObject {
     private var midPoint: CGPoint = .zero
     
     // Focus
-    private var currentFocusedComponent: FocusableComponent? = nil
+    private var currentFocusedBlock: Block? = nil
     private var currentFocusedPosition: SCNVector3 = SCNVector3()
     private var currentFocusedRotation: SCNVector4 = SCNVector4()
     
@@ -135,26 +135,28 @@ extension Coordinator: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         // Hit test and only used node which is the top most position
-        if let firstResult = renderer.hitTest(self.midPoint, options: [:]).first {
+        if let firstResult = renderer.hitTest(self.midPoint, options: [.ignoreHiddenNodes: true]).first {
             
             // This means the only thing in front of the object is a plane
             if( firstResult.node.geometry is SCNFloor ) {
                 self.currentFocusedPosition = firstResult.worldCoordinates
-//                self.currentFocusedRotation = firstResult.node.rotation
                 
             } else {
-                let focusComponent = firstResult.node.entity?.component(ofType: FocusableComponent.self)
+                let block = firstResult.node.entity as? Block
                 
-                if( focusComponent != self.currentFocusedComponent ) {
+                if( block != self.currentFocusedBlock ) {
                     
                     // Remove focus from old element
-                    self.currentFocusedComponent?.state = .notFocused
-                    
+                    self.currentFocusedBlock?.component(ofType: FocusableComponent.self)?.state = .notFocused
+//                    self.currentFocusedBlock?.component(ofType: BlockComponent.self)?.hideTypeSelectionInterface()
+
                     // Add focus to new element
-                    focusComponent?.state = .focused
+                    block?.component(ofType: FocusableComponent.self)?.state = .focused
+//                    block?.component(ofType: BlockComponent.self)?.displayTypeSelectionInterface()
                     
                     // Set reference
-                    self.currentFocusedComponent = focusComponent
+                    self.currentFocusedBlock = block
+                    
                 }
             }
         }

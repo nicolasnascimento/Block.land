@@ -19,13 +19,15 @@ class FocusView: UIView {
     
     // Status for Focus View
     var animationDuration = 0.1
+    var maxScale: CGFloat = 1.2
     var status: Status = .idle {
         willSet {
             if newValue != self.status {
                 switch newValue {
                 case .foundObject:
+                    let maxScale = self.maxScale
                     UIView.animate(withDuration: self.animationDuration) { [weak self] in
-                        self?.transform = CGAffineTransform.identity.scaledBy(x: 1.2, y: 1.2)
+                        self?.transform = CGAffineTransform.identity.scaledBy(x: maxScale, y: maxScale)
                     }
                     UIView.setAnimationCurve(.easeOut)
                 case .idle:
