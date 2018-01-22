@@ -23,11 +23,12 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create coordinator
-        self.coordinator = Coordinator(view: self.sceneView)
-        
         // Create Overlay and add its view
         self.overlay = Overlay(with: self.sceneView)
+        
+        // Create coordinator
+        self.coordinator = Coordinator(overlay: self.overlay)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

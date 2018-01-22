@@ -16,10 +16,13 @@ final class Coordinator: NSObject {
     // MARK: - Public
     
     // The scene in which AR content is displayed
-    weak var view: ARSCNView?
+    weak var view: ARSCNView? { return self.overlay.view.superview as? ARSCNView }
     
     // The entity object manager
     var manager: EntityManager
+    
+    // The Overlay manager
+    private var overlay: Overlay
 
     /// The canvasNode in which all nodes are added
     private var canvasNode: SCNNode!
@@ -35,17 +38,15 @@ final class Coordinator: NSObject {
     private var currentFocusedRotation: SCNVector4 = SCNVector4()
     
     // MARK: - Initialization
-    init(view: ARSCNView) {
+    init(overlay: Overlay) {
 
+        self.overlay = overlay
+        
         // Initialize manager
         self.manager = EntityManager()
         
         // Perform superclass initialization
         super.init()
-        
-        // Assign view weak reference
-        self.view = view
-        
         
         // Load base world from file
         guard let scene = SCNScene(named: Environment.Files.baseWorldScene) else { fatalError("Couldn't load base world scene from file: \(Environment.Files.baseWorldScene)") }
@@ -84,27 +85,31 @@ final class Coordinator: NSObject {
         // Make sure delegate callbacks will be provided
         self.view?.delegate = self
         self.manager.delegate = self
-        (self.view?.parentViewController as? MainViewController)?.overlay.delegate = self
+        self.overlay.delegate = self
+        
+        // Update Overlay
+        self.overlay.state = .normal
     }
     
     // MARK: - Private
     private func add(_ node: SCNNode) {
         self.canvasNode.addChildNode(node)
     }
-}
-
-extension Coordinator: ARSCNViewDelegate {
     
+    // Stores/Update Plane if possible
     private func handlePlaneAnchorDetection(for newPlaneAnchor: ARPlaneAnchor) {
-        if planeIterations > 0 {
+        if( planeIterations > 0 ) {
             
             // Iterate on plane detection
             planeIterations -= 1
             
             // Stop tracking
             if( planeIterations == 0 ) {
-                let configuration = ARWorldTrackingConfiguration()
-                self.view?.session.run(configuration)
+                DispatchQueue.main.async {
+                    let configuration = ARWorldTrackingConfiguration()
+                    
+                    self.view?.session.run(configuration)
+                }
             }
             
             if let currentPlaneAnchor = self.planeAnchor {
@@ -121,6 +126,9 @@ extension Coordinator: ARSCNViewDelegate {
             }
         }
     }
+}
+
+extension Coordinator: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
@@ -135,30 +143,49 @@ extension Coordinator: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         // Hit test and only used node which is the top most position
-        if let firstResult = renderer.hitTest(self.midPoint, options: [.ignoreHiddenNodes: true]).first {
+        if let firstResult = renderer.hitTest(self.midPoint, options: [:]).first {
             
             // This means the only thing in front of the object is a plane
             if( firstResult.node.geometry is SCNFloor ) {
                 self.currentFocusedPosition = firstResult.worldCoordinates
                 
-            } else {
-                let block = firstResult.node.entity as? Block
-                
-                if( block != self.currentFocusedBlock ) {
-                    
-                    // Remove focus from old element
-                    self.currentFocusedBlock?.component(ofType: FocusableComponent.self)?.state = .notFocused
-//                    self.currentFocusedBlock?.component(ofType: BlockComponent.self)?.hideTypeSelectionInterface()
+            }
+            
+            let block = firstResult.node.entity as? Block
 
-                    // Add focus to new element
-                    block?.component(ofType: FocusableComponent.self)?.state = .focused
-//                    block?.component(ofType: BlockComponent.self)?.displayTypeSelectionInterface()
-                    
-                    // Set reference
-                    self.currentFocusedBlock = block
-                    
+            if( block != self.currentFocusedBlock ) {
+                
+                // Remove focus from old element
+                self.currentFocusedBlock?.component(ofType: FocusableComponent.self)?.state = .notFocused
+
+                // Add focus to new element
+                block?.component(ofType: FocusableComponent.self)?.state = .focused
+                
+                // Set reference
+                self.currentFocusedBlock = block
+                
+                // Update Overlay
+                var newState = Overlay.State.unknown
+                if let _ = self.currentFocusedBlock {
+                    newState = .editingBlock
+                } else {
+                    newState = .normal
+                }
+                if( newState != self.overlay.state ) {
+                    DispatchQueue.main.async {
+                        self.overlay.state = newState
+                        UIViewPropertyAnimator(duration: 1.0, dampingRatio: 0.4) {
+                            self.view?.layoutIfNeeded()
+                        }.startAnimation()
+                    }
                 }
             }
+        } else {
+            // Remove focus from old element
+            self.currentFocusedBlock?.component(ofType: FocusableComponent.self)?.state = .notFocused
+            
+            // Remove reference
+            self.currentFocusedBlock = nil
         }
     }
     
@@ -178,8 +205,8 @@ extension Coordinator: EntityManagerDelegate {
     }
     
     func entityManager(_ entityManager: EntityManager, didRemove entity: GKEntity) {
-        print(#function)
-        print("Should remove visual representation here")
+        // Remove Node from Scene
+        entity.component(ofType: BlockComponent.self)?.blockNode.removeFromParentNode()
     }
     
     func entityManager(_ entityManager: EntityManager, didFailToRemove entity: GKEntity) {
@@ -199,4 +226,12 @@ extension Coordinator: OverlayDelegate {
         
     }
     
+    func overlay(_ overlay: Overlay, didSelect option: BlockComponent.BlockMaterialType) {
+        if let focusedBlock = self.currentFocusedBlock {
+            
+            focusedBlock.type = option
+            
+        }
+        
+    }
 }
