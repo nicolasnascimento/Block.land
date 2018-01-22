@@ -20,6 +20,9 @@
 		0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */; };
 		0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00F20111AFC00DA40F9 /* FocusView.swift */; };
 		0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */; };
+		0CE7579120161F5300E9D1A6 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7579020161F5300E9D1A6 /* AddButton.swift */; };
+		0CE75793201624FD00E9D1A6 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE75792201624FD00E9D1A6 /* OverlayView.swift */; };
+		0CE757962016478300E9D1A6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE757952016478300E9D1A6 /* Alert.swift */; };
 		0CF204D0200E6A5E00873B27 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204CF200E6A5E00873B27 /* Block.swift */; };
 		0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D1200E6C0200873B27 /* BlockComponent.swift */; };
 		0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */; };
@@ -45,6 +48,9 @@
 		0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0C20E00F20111AFC00DA40F9 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableComponent.swift; sourceTree = "<group>"; };
+		0CE7579020161F5300E9D1A6 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		0CE75792201624FD00E9D1A6 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		0CE757952016478300E9D1A6 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0CF204CF200E6A5E00873B27 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		0CF204D1200E6C0200873B27 /* BlockComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockComponent.swift; sourceTree = "<group>"; };
 		0CF204D3200E6E8700873B27 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 			children = (
 				0C178590200E5D21006D44C9 /* Environment.swift */,
 				0C17858B200E5B7F006D44C9 /* EntityManager.swift */,
+				0CE757952016478300E9D1A6 /* Alert.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -165,6 +172,8 @@
 		0C20E0112011292500DA40F9 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				0CE75792201624FD00E9D1A6 /* OverlayView.swift */,
+				0CE7579020161F5300E9D1A6 /* AddButton.swift */,
 				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
 				0C1587A7201274B000C2C26F /* BlockOptionsView.swift */,
 			);
@@ -306,12 +315,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE757962016478300E9D1A6 /* Alert.swift in Sources */,
 				0C1587A8201274B000C2C26F /* BlockOptionsView.swift in Sources */,
 				0CF204D0200E6A5E00873B27 /* Block.swift in Sources */,
 				0C178591200E5D21006D44C9 /* Environment.swift in Sources */,
+				0CE7579120161F5300E9D1A6 /* AddButton.swift in Sources */,
 				0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */,
 				0CF204DC200F9CF600873B27 /* SCNNodeExtensions.swift in Sources */,
 				0C178571200E590B006D44C9 /* MainViewController.swift in Sources */,
+				0CE75793201624FD00E9D1A6 /* OverlayView.swift in Sources */,
 				0CF204DF200FA58D00873B27 /* Overlay.swift in Sources */,
 				0C17858F200E5C87006D44C9 /* Coordinator.swift in Sources */,
 				0CF204D2200E6C0200873B27 /* BlockComponent.swift in Sources */,

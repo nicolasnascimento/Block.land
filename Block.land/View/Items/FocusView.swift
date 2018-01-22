@@ -10,12 +10,15 @@ import UIKit
 
 class FocusView: UIView {
     
-    
     // MARK: - Public Properties
     enum Status {
         case idle
         case foundObject
     }
+    
+    // Set default values. This will be overriden later
+    var controlConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    var controlConstantValue: CGFloat = 0
     
     // Status for Focus View
     var animationDuration = 0.1
@@ -51,4 +54,10 @@ class FocusView: UIView {
         self.layer.borderColor = UIColor.white.cgColor
     }
     
+}
+
+extension FocusView: OverlayView {
+    func shouldBeVisible(for state: Overlay.State) -> Bool {
+        return true
+    }
 }

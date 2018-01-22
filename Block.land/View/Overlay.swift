@@ -12,8 +12,10 @@ import TinyConstraints
 // Implement these methods to get callbacks when button in the overlay are pressed
 protocol OverlayDelegate: class {
     func overlay(_ overlay: Overlay, didPressAdd button: UIButton)
+    func overlay(_ overlay: Overlay, didSelect option: BlockComponent.BlockMaterialType)
 }
 
+/// Manages the components displayed in the view
 final class Overlay {
     
     // MARK: - Public
@@ -21,28 +23,44 @@ final class Overlay {
     // The delegate to which overlay related events will be sent
     weak var delegate: OverlayDelegate?
     
-    /// The view in which all other components will be placed
-    var view: UIView
+    // The states in which the overlay may be
+    enum State {
+        case normal
+        case editingBlock
+        case unknown
+    }
+    /// The state of the overlay
+    var state: State = .unknown {
+        willSet {
+            // Only Update if the state is a new one
+            if( self.state != newValue ) {
+                self.update(for: newValue)
+            }
+        }
+    }
+
+    // MARK: - Private Properties
     
-    // MARK: - Private
+    /// The view in which all other components will be placed
+    private(set) var view: UIView
     
     /// The button used to perform add action
-    private var addButton: UIButton
+    private var addButton: AddButton
     
     /// The view which will be used to provide focus
     private var focusCircle: FocusView
     
     /// The view which will be used for displaying block options
-    private var blockOptios: BlockOptionsView
+    private var blockOptions: BlockOptionsView
     
-    // MARK - Initialization
+    // MARK: - Init
     init(with superView: UIView) {
         
         // Instatiate properties to default values
         self.view = UIView(frame: .zero)
-        self.addButton = UIButton(frame: .zero)
+        self.addButton = AddButton(frame: .zero)
         self.focusCircle = FocusView(frame: .zero)
-        self.blockOptios = BlockOptionsView(frame: .zero)
+        self.blockOptions = BlockOptionsView(frame: .zero)
         
         // Setup View
         self.setupView(for: superView)
@@ -99,7 +117,10 @@ final class Overlay {
         self.addButton.heightToSuperview(multiplier: heightMultiplier)
         self.addButton.widthToSuperview(multiplier: widthMultiplier)
         self.addButton.centerX(to: superView)
-        self.addButton.bottomToSuperview(offset: -bottomSpacing)
+        
+        // Keep a reference as we'll need to update this later
+        self.addButton.controlConstraint = self.addButton.bottomToSuperview(offset: -bottomSpacing)
+        self.addButton.controlConstantValue = -bottomSpacing
  
         // Update Layout
         self.addButton.updateLayout()
@@ -130,13 +151,13 @@ final class Overlay {
     }
     private func setupBlockOptions(for superView: UIView) {
         // Add layer view to superView's view hierarchy
-        superView.addSubview(self.blockOptios)
+        superView.addSubview(self.blockOptions)
         
         // Avoid unwanted constraints
-        self.blockOptios.translatesAutoresizingMaskIntoConstraints = false
+        self.blockOptions.translatesAutoresizingMaskIntoConstraints = false
         
         // Setup buttons
-        self.blockOptios.setup()
+        self.blockOptions.setup()
         
         // Control values for setting up layout
         let heightMultiplier: CGFloat = 0.1
@@ -144,22 +165,43 @@ final class Overlay {
         let bottomSpacing: CGFloat = superView.frame.height*heightMultiplier*0.25
         
         // Setup Constrains
-        self.blockOptios.heightToSuperview(multiplier: heightMultiplier)
-        self.blockOptios.widthToSuperview(multiplier: widthMultiplier)
-        self.blockOptios.centerX(to: superView)
-        self.blockOptios.bottomToSuperview(offset: -bottomSpacing)
+        self.blockOptions.heightToSuperview(multiplier: heightMultiplier)
+        self.blockOptions.widthToSuperview(multiplier: widthMultiplier)
+        self.blockOptions.centerX(to: superView)
+        
+        // Keep a reference as we'll need to update this later
+        self.blockOptions.controlConstraint = self.blockOptions.bottomToSuperview(offset: -bottomSpacing)
+        self.blockOptions.controlConstantValue = -bottomSpacing
         
         // Update Layout
-        self.blockOptios.updateLayout()
+        self.blockOptions.updateLayout()
     
         // Setup Default State
-        self.blockOptios.isDisplaying = true
-        self.blockOptios.backgroundColor = .clear
+        self.blockOptions.backgroundColor = .clear
+        
+        // Setup Delegate Callback
+        self.blockOptions.delegate = self
     }
     
+    private func update(for state: State) {
+        // The views which can be updated
+        for view: OverlayView in [self.addButton, self.blockOptions, self.focusCircle] {
+            if( view.shouldBeVisible(for: state) ) {
+                view.show()
+            } else {
+                view.hide()
+            }
+        }
+    }
     
     // MARK: - Actions
     @objc private func addButtonDidGetPressed(_ addButton: UIButton) {
         self.delegate?.overlay(self, didPressAdd: addButton)
+    }
+}
+
+extension Overlay: BlockOptionsViewDelegate {
+    func blockOptionsView(_ blockOptionView: BlockOptionsView, didSelect option: BlockComponent.BlockMaterialType) {
+        self.delegate?.overlay(self, didSelect: option)
     }
 }

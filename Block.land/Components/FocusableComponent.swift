@@ -24,14 +24,12 @@ final class FocusableComponent: GKComponent {
                 case .focused:
 
                     // Blink Action
-                    let angularSpeed = CGFloat.pi
                     let fadeOut = SCNAction.fadeOpacity(to: 0.5, duration: self.animationDuration*0.5)
                     let fadeIn = SCNAction.fadeOpacity(to: 1.0, duration: self.animationDuration*0.5)
                     let fade = SCNAction.repeatForever(SCNAction.sequence([fadeOut, fadeIn]))
                     
                     self.effectNode.runAction(fade, forKey: self.fadeActionKey)
 
-                    
                 case .notFocused:
                     
                     // Restore Default values
@@ -46,7 +44,6 @@ final class FocusableComponent: GKComponent {
     
     private let fadeActionKey = "rotationActionKey"
     private var effectNode: SCNNode
-    
     
     init(effectNode: SCNNode) {
         self.effectNode = effectNode

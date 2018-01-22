@@ -16,7 +16,7 @@ extension UIView {
         self.layoutIfNeeded()
     }
     
-    // Quick serach for parent view controller
+    // Quick search for parent view controller
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
