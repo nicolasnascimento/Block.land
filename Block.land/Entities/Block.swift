@@ -20,7 +20,9 @@ final class Block: GKEntity {
     }
     
     // MARK: - Initialization
-    init(type: BlockComponent.BlockMaterialType, at spatialCoordinate: (position: SCNVector3, rotation: SCNVector4)? = nil) {
+    init(type: BlockComponent.BlockMaterialType,
+         at spatialCoordinate: (position: SCNVector3,
+        rotation: SCNVector4)? = nil) {
         super.init()
         
         // Create the 3D block representation

@@ -28,7 +28,6 @@ extension UIViewController {
         }
     }
     
-    
     // MARK: - Private
     private func confirmationAction(with handler: @escaping () -> Void) -> UIAlertAction {
         return UIAlertAction(title: "Ok", style: .default) { _ in
@@ -37,4 +36,3 @@ extension UIViewController {
     }
     
 }
-

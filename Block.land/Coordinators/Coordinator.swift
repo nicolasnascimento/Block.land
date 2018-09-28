@@ -34,7 +34,7 @@ final class Coordinator: NSObject {
     private var midPoint: CGPoint = .zero
     
     // Focus
-    private var currentFocusedBlock: Block? = nil
+    private var currentFocusedBlock: Block?
     private var currentFocusedPosition: SCNVector3 = SCNVector3()
     private var currentFocusedRotation: SCNVector4 = SCNVector4()
     
@@ -51,7 +51,10 @@ final class Coordinator: NSObject {
         super.init()
         
         // Load base world from file
-        guard let scene = SCNScene(named: Environment.Files.baseWorldScene) else { fatalError("Couldn't load base world scene from file: \(Environment.Files.baseWorldScene)") }
+        guard let scene = SCNScene(named: Environment.Files.baseWorldScene) else {
+            let failMessage = "Couldn't load base world scene from file: \(Environment.Files.baseWorldScene)"
+            fatalError(failMessage)
+        }
         self.view?.scene = scene
         
         // Add canvas node
@@ -59,7 +62,7 @@ final class Coordinator: NSObject {
         self.view?.scene.rootNode.addChildNode(self.canvasNode)
         
         // Debug
-        if( Environment.debugMode ) {
+        if Environment.debugMode {
             
             // FPS, Node Counte, etc
             self.view?.showsStatistics = true
@@ -100,13 +103,13 @@ final class Coordinator: NSObject {
     
     // Stores/Update Plane if possible
     private func handlePlaneAnchorDetection(for newPlaneAnchor: ARPlaneAnchor) {
-        if( planeIterations > 0 ) {
+        if planeIterations > 0 {
             
             // Iterate on plane detection
             planeIterations -= 1
             
             // Stop tracking
-            if( planeIterations == 0 ) {
+            if planeIterations == 0 {
                 DispatchQueue.main.async {
                     let configuration = ARWorldTrackingConfiguration()
                     
@@ -145,21 +148,20 @@ extension Coordinator: ARSCNViewDelegate {
         self.handlePlaneAnchorDetection(for: newPlaneAnchor)
     }
     
-    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         // Hit test and only used node which is the top most position
         if let firstResult = renderer.hitTest(self.midPoint, options: [:]).first {
             
             // This means the only thing in front of the object is a plane
-            if( firstResult.node.geometry is SCNFloor ) {
+            if firstResult.node.geometry is SCNFloor {
                 self.currentFocusedPosition = firstResult.worldCoordinates
                 
             }
             
             let block = firstResult.node.entity as? Block
 
-            if( block != self.currentFocusedBlock ) {
+            if block != self.currentFocusedBlock {
                 
                 // Remove focus from old element
                 self.currentFocusedBlock?.component(ofType: FocusableComponent.self)?.state = .notFocused
@@ -172,12 +174,12 @@ extension Coordinator: ARSCNViewDelegate {
                 
                 // Update Overlay
                 var newState = Overlay.State.unknown
-                if let _ = self.currentFocusedBlock {
+                if self.currentFocusedBlock != nil {
                     newState = .editingBlock
                 } else {
                     newState = .normal
                 }
-                if( newState != self.overlay.state ) {
+                if newState != self.overlay.state {
                     DispatchQueue.main.async {
                         self.overlay.state = newState
                         UIViewPropertyAnimator(duration: 1.0, dampingRatio: 0.4) {
@@ -228,7 +230,11 @@ extension Coordinator: OverlayDelegate {
         print(self.currentFocusedPosition)
         
         // Add Block
-        self.manager.add(entity: Block(type: .random, at: (position: self.currentFocusedPosition, rotation: self.currentFocusedRotation)))
+        self.manager.add(entity:
+            Block(type: .random,
+                  at: (position: self.currentFocusedPosition,
+                       rotation: self.currentFocusedRotation))
+        )
         
     }
     

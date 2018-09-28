@@ -28,7 +28,7 @@ protocol OverlayView {
 }
 
 /// MARK: - Default Implementation
-extension OverlayView where Self:UIView {
+extension OverlayView where Self: UIView {
     
     var controlOffsetDistance: CGFloat {
         return self.frame.size.height*2.0

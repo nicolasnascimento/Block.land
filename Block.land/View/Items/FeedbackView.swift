@@ -15,9 +15,8 @@ final class FeedbackView: UIView {
     private var backgroundView: UIView { return self.newViewOnlyIfNeeded(with: 8889) }
     
     // MARK: - Public Properties
-    var color: UIColor = .lightGray             { didSet { self.setup() } }
-    var feedbackText: String = "No Feedback"    { didSet { self.setup() } }
-    
+    var color: UIColor = .lightGray { didSet { self.setup() } }
+    var feedbackText: String = "No Feedback" { didSet { self.setup() } }
     
     func setup() {
         // Get label and background view

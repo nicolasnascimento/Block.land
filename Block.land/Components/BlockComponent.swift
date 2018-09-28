@@ -15,10 +15,10 @@ final class BlockComponent: GKComponent {
     
     /// The type of material to be used in the block
     enum BlockMaterialType: String {
-        case brown = "brown"
-        case lightOrange = "lightOrange"
-        case darkOrange = "darkOrange"
-        case darkBrown = "darkBrown"
+        case brown
+        case lightOrange
+        case darkOrange
+        case darkBrown
         
         // Handy cases
         static var random: BlockMaterialType {
@@ -50,7 +50,10 @@ final class BlockComponent: GKComponent {
         self.type = type
         self.dimensions = dimensions
         // Create Geometry
-        let geometry = SCNBox(width: dimensions.width, height: dimensions.height, length: dimensions.length, chamferRadius: chamferRadius)
+        let geometry = SCNBox(width: dimensions.width,
+                              height: dimensions.height,
+                              length: dimensions.length,
+                              chamferRadius: chamferRadius)
         geometry.firstMaterial?.diffuse.contents = UIImage(named: type.rawValue)        
         geometry.firstMaterial?.normal.contents = UIImage(named: "wood-normal")
         geometry.firstMaterial?.lightingModel = .physicallyBased

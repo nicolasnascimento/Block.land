@@ -12,7 +12,6 @@ protocol BlockOptionsViewDelegate: class {
     func blockOptionsView(_ blockOptionView: BlockOptionsView, didSelect option: BlockComponent.BlockMaterialType)
 }
 
-
 final class BlockOptionsView: UIView {
     
     // Delegate
@@ -33,7 +32,7 @@ final class BlockOptionsView: UIView {
         self.blockOptions = blockOptions
         
         // Create options if they're not stored it
-        if( !self.optionButtons.arrangedSubviews.isEmpty ) {
+        if !self.optionButtons.arrangedSubviews.isEmpty {
             print("Setup was already Performed")
             
         }
@@ -52,16 +51,16 @@ final class BlockOptionsView: UIView {
     private func createOptionButtons(using blockOptions: [BlockComponent.BlockMaterialType]) {
         
         // [Option] -> [Image]
-        let images = blockOptions.map{ UIImage(named: $0.rawValue) }
+        let images = blockOptions.map { UIImage(named: $0.rawValue) }
         
         // [Image] -> [Button]
-        let optionButtons: [UIButton] = images.map{ image in
+        let optionButtons: [UIButton] = images.map { image in
             let button = UIButton(frame: .zero)
             button.setImage(image, for: .normal)
             
             // Use the index of the image associated with the button.
             // This allows to use the index later in the callback
-            button.tag = images.index{ $0 == image } ?? self.noIndexTag
+            button.tag = images.index { $0 == image } ?? self.noIndexTag
             
             return button
         }
@@ -98,7 +97,7 @@ final class BlockOptionsView: UIView {
         self.optionButtons.updateLayout()
         
         // Now we can set the Layer
-        self.optionButtons.arrangedSubviews.forEach{
+        self.optionButtons.arrangedSubviews.forEach {
             $0.layer.cornerRadius = buttonCornerRadius
             $0.layer.borderColor = buttonBorderColor
             $0.layer.borderWidth = buttonBorderWidth
@@ -113,7 +112,6 @@ final class BlockOptionsView: UIView {
         }
     }
     
-    
     // MARK: - Actions
     @objc private func buttonTouched(_ button: UIButton) {
         if button.tag != self.noIndexTag {
@@ -124,7 +122,6 @@ final class BlockOptionsView: UIView {
     }
     
 }
-
 
 extension BlockOptionsView: OverlayView {
 

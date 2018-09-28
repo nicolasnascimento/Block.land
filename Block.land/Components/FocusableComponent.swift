@@ -19,7 +19,7 @@ final class FocusableComponent: GKComponent {
     var animationDuration = 1.0
     var state: State = .notFocused {
         willSet {
-            if( newValue != self.state ) {
+            if newValue != self.state {
                 switch newValue {
                 case .focused:
 

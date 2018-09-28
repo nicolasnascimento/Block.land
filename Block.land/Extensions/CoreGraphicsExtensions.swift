@@ -16,7 +16,7 @@ struct CGSize3 {
 }
 
 extension CGSize3: Equatable {
-    static func ==(lhs: CGSize3, rhs: CGSize3) -> Bool {
+    static func == (lhs: CGSize3, rhs: CGSize3) -> Bool {
         return lhs.height == rhs.height && lhs.width == rhs.width && lhs.length == rhs.length
     }
 }

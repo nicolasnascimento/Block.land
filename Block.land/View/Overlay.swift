@@ -33,7 +33,7 @@ final class Overlay {
     var state: State = .unknown {
         willSet {
             // Only Update if the state is a new one
-            if( self.state != newValue ) {
+            if self.state != newValue {
                 self.update(for: newValue)
             }
         }
@@ -93,7 +93,7 @@ final class Overlay {
         self.view.backgroundColor = .clear
         
         // Debug Layer
-        if( Environment.debugMode ) {
+        if Environment.debugMode {
             self.view.layer.borderWidth = 1.0
             self.view.layer.borderColor = UIColor.lightGray.cgColor
         }
@@ -198,7 +198,7 @@ final class Overlay {
         superView.addSubview(self.feedbackProvider)
         
         let rightSpacing: CGFloat = 20
-        let topSpacing:CGFloat = rightSpacing
+        let topSpacing: CGFloat = rightSpacing
         
         self.feedbackProvider.topToSuperview(offset: topSpacing)
         self.feedbackProvider.rightToSuperview(offset: rightSpacing)
@@ -213,7 +213,7 @@ final class Overlay {
     private func update(for state: State) {
         // The views which can be updated
         for view: OverlayView in [self.addButton, self.blockOptions, self.focusCircle] {
-            if( view.shouldBeVisible(for: state) ) {
+            if view.shouldBeVisible(for: state) {
                 view.show()
             } else {
                 view.hide()
