@@ -26,6 +26,7 @@ final class Coordinator: NSObject {
 
     /// The canvasNode in which all nodes are added
     private var canvasNode: SCNNode!
+    private let canvasNodeName: String = "canvasNode"
     
     // A flag to indicate if plane was already detected
     private var planeAnchor: ARPlaneAnchor?
@@ -40,7 +41,8 @@ final class Coordinator: NSObject {
     // MARK: - Initialization
     init(overlay: Overlay) {
 
-        self.overlay = overlay
+        // Initialize Overaly
+        self.overlay = overlay        
         
         // Initialize manager
         self.manager = EntityManager()
@@ -53,7 +55,7 @@ final class Coordinator: NSObject {
         self.view?.scene = scene
         
         // Add canvas node
-        self.canvasNode = self.view?.scene.rootNode.childNode(withName: "canvasNode", recursively: true)!
+        self.canvasNode = self.view?.scene.rootNode.childNode(withName: self.canvasNodeName, recursively: true)!
         self.view?.scene.rootNode.addChildNode(self.canvasNode)
         
         // Debug
@@ -118,6 +120,10 @@ final class Coordinator: NSObject {
                 }
             } else {
                 self.planeAnchor = newPlaneAnchor
+                
+                DispatchQueue.main.async {
+                    self.overlay.hasPlane = true
+                }
                 
                 print("Detected Plane")
                 print("Setting Transform \(self.canvasNode.position)")

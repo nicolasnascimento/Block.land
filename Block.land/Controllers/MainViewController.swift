@@ -17,18 +17,15 @@ final class MainViewController: UIViewController {
     // MARK: - Public
     var coordinator: Coordinator!
     
-    var overlay: Overlay!
-    
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Create Overlay and add its view
-        self.overlay = Overlay(with: self.sceneView)
+        let overlay = Overlay(with: self.sceneView)
         
         // Create coordinator
-        self.coordinator = Coordinator(overlay: self.overlay)
-        
+        self.coordinator = Coordinator(overlay: overlay)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +33,6 @@ final class MainViewController: UIViewController {
         
         // Begin coordinator
         self.coordinator.begin()
-        
     }
 
 }

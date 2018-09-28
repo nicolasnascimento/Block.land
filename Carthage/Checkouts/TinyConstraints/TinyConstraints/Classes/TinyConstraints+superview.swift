@@ -137,7 +137,10 @@ public struct LayoutEdge: OptionSet {
 public extension View {
     
     private func safeConstrainable(for superview: View?, usingSafeArea: Bool) -> Constrainable {
-        guard let superview = superview else { fatalError("Unable to create this constraint to it's superview, because it has no superview.") }
+        guard let superview = superview else {
+            fatalError("Unable to create this constraint to it's superview, because it has no superview.")
+        }
+        
         prepareForLayout()
         
         #if os(iOS) || os(tvOS)
@@ -173,13 +176,13 @@ public extension View {
     @discardableResult
     public func widthToSuperview( _ dimension: NSLayoutDimension? = nil, multiplier: CGFloat = 1, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) -> Constraint {
         let constrainable = safeConstrainable(for: superview, usingSafeArea: usingSafeArea)
-        return width(to: constrainable, dimension, multiplier: multiplier, offset: offset, priority: priority, isActive: isActive)
+        return width(to: constrainable, dimension, multiplier: multiplier, offset: offset, relation: relation, priority: priority, isActive: isActive)
     }
     
     @discardableResult
     public func heightToSuperview( _ dimension: NSLayoutDimension? = nil, multiplier: CGFloat = 1, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) -> Constraint {
         let constrainable = safeConstrainable(for: superview, usingSafeArea: usingSafeArea)
-        return height(to: constrainable, dimension, multiplier: multiplier, offset: offset, priority: priority, isActive: isActive)
+        return height(to: constrainable, dimension, multiplier: multiplier, offset: offset, relation: relation, priority: priority, isActive: isActive)
     }
     
     @discardableResult
@@ -191,7 +194,7 @@ public extension View {
     @discardableResult
     public func rightToSuperview( _ anchor: NSLayoutXAxisAnchor? = nil, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) -> Constraint {
         let constrainable = safeConstrainable(for: superview, usingSafeArea: usingSafeArea)
-        return right(to: constrainable, anchor, offset: -offset, relation: relation, priority: priority, isActive: isActive)
+        return right(to: constrainable, anchor, offset: offset, relation: relation, priority: priority, isActive: isActive)
     }
     
     @discardableResult

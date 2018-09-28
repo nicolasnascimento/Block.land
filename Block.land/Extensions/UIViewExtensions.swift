@@ -28,3 +28,20 @@ extension UIView {
         return nil
     }
 }
+
+extension UIView {
+    
+    /// Get a view from the current hierarchy which is associated
+    func newViewOnlyIfNeeded<T>(with tag: Int, allocationBlock: (() -> T)? = nil) -> T where T: UIView {
+        if let view = self.viewWithTag(tag) as? T {
+            return view
+        } else {
+            
+            // Create new view
+            let view = allocationBlock?() ?? T(frame: self.bounds)
+            view.tag = tag
+            
+            return view
+        }
+    }
+}

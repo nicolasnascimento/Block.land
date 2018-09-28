@@ -20,6 +20,7 @@
 		0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */; };
 		0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E00F20111AFC00DA40F9 /* FocusView.swift */; };
 		0C20E01320112F4A00DA40F9 /* FocusableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */; };
+		0C35032620614DB500480D94 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C35032520614DB500480D94 /* FeedbackView.swift */; };
 		0CE7579120161F5300E9D1A6 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7579020161F5300E9D1A6 /* AddButton.swift */; };
 		0CE75793201624FD00E9D1A6 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE75792201624FD00E9D1A6 /* OverlayView.swift */; };
 		0CE757962016478300E9D1A6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE757952016478300E9D1A6 /* Alert.swift */; };
@@ -48,6 +49,7 @@
 		0C20E00B2010F9DE00DA40F9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		0C20E00F20111AFC00DA40F9 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		0C20E01220112F4A00DA40F9 /* FocusableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableComponent.swift; sourceTree = "<group>"; };
+		0C35032520614DB500480D94 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		0CE7579020161F5300E9D1A6 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		0CE75792201624FD00E9D1A6 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		0CE757952016478300E9D1A6 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				0CE7579020161F5300E9D1A6 /* AddButton.swift */,
 				0C20E00F20111AFC00DA40F9 /* FocusView.swift */,
 				0C1587A7201274B000C2C26F /* BlockOptionsView.swift */,
+				0C35032520614DB500480D94 /* FeedbackView.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -236,11 +239,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Nicolas Nascimento";
 				TargetAttributes = {
 					0C17856A200E590B006D44C9 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -332,6 +336,7 @@
 				0C20E01020111AFC00DA40F9 /* FocusView.swift in Sources */,
 				0CF204D4200E6E8700873B27 /* PhysicsComponent.swift in Sources */,
 				0C20E00C2010F9DE00DA40F9 /* UIViewExtensions.swift in Sources */,
+				0C35032620614DB500480D94 /* FeedbackView.swift in Sources */,
 				0CF204DA200F9C0000873B27 /* CoreGraphicsExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +377,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -379,6 +385,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -429,6 +436,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -436,6 +444,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -480,7 +489,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nicolasnascimento.Block-land";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -500,7 +509,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nicolasnascimento.Block-land";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

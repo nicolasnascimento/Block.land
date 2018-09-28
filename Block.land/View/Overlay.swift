@@ -38,6 +38,11 @@ final class Overlay {
             }
         }
     }
+    var hasPlane: Bool = false {
+        didSet {
+            self.feedbackProvider.isHidden = self.hasPlane
+        }
+    }
 
     // MARK: - Private Properties
     
@@ -53,6 +58,9 @@ final class Overlay {
     /// The view which will be used for displaying block options
     private var blockOptions: BlockOptionsView
     
+    /// The view which will be used for providing feedback
+    private var feedbackProvider: UIActivityIndicatorView
+    
     // MARK: - Init
     init(with superView: UIView) {
         
@@ -61,6 +69,7 @@ final class Overlay {
         self.addButton = AddButton(frame: .zero)
         self.focusCircle = FocusView(frame: .zero)
         self.blockOptions = BlockOptionsView(frame: .zero)
+        self.feedbackProvider = UIActivityIndicatorView(style: .gray)
         
         // Setup View
         self.setupView(for: superView)
@@ -74,6 +83,8 @@ final class Overlay {
         // Setup Block Options
         self.setupBlockOptions(for: self.view)
         
+        // Setup FeedbackProvider
+        self.setupFeedbackProvider(for: self.view)
     }
     
     // MARK: - Private
@@ -181,6 +192,22 @@ final class Overlay {
         
         // Setup Delegate Callback
         self.blockOptions.delegate = self
+    }
+    private func setupFeedbackProvider(for superView: UIView) {
+        // Add layer view to superView's view hierarchy
+        superView.addSubview(self.feedbackProvider)
+        
+        let rightSpacing: CGFloat = 20
+        let topSpacing:CGFloat = rightSpacing
+        
+        self.feedbackProvider.topToSuperview(offset: topSpacing)
+        self.feedbackProvider.rightToSuperview(offset: rightSpacing)
+        
+        self.feedbackProvider.updateLayout()
+        
+        self.feedbackProvider.isHidden = false
+        self.feedbackProvider.startAnimating()
+        self.feedbackProvider.hidesWhenStopped = true
     }
     
     private func update(for state: State) {

@@ -8,42 +8,33 @@
 
 import UIKit
 
-final class Alert {
+extension UIViewController {
     
-    static var currentViewController: UIViewController? {
-        
-        // Get view controller being presented now
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            
-            return topController
-        }
-        return nil
+    enum AlertType {
+        case error(String)
     }
     
-    class func error(with message: String, confirmationHandler: @escaping () -> Void) {
-     
-        let confirmationAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-            guard let alert = Alert.currentViewController?.presentedViewController as? UIAlertController else { fatalError("Cannot dismiss if no alert is being presented") }
+    func presentAlert(with type: AlertType, confirmationHandler: (() -> Void)? = nil) {
+    
+        switch type {
+        case .error(let message):
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             
-            alert.dismiss(animated: true) {
-                confirmationHandler()
+            if let handler = confirmationHandler {
+                alertController.addAction(self.confirmationAction(with: handler))
             }
+            
+            self.present(alertController, animated: true, completion: nil)
         }
-        
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertController.addAction(confirmationAction)
-        Alert.present(alertController: alertController)
-        
     }
     
     
     // MARK: - Private
-    class func present(alertController: UIAlertController, completionHandler: (() -> Void)? = nil) {
-        Alert.currentViewController?.present(alertController, animated: true) {
-            completionHandler?()
+    private func confirmationAction(with handler: @escaping () -> Void) -> UIAlertAction {
+        return UIAlertAction(title: "Ok", style: .default) { _ in
+            handler()
         }
     }
+    
 }
+

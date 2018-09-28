@@ -29,4 +29,6 @@ enum Environment {
     enum Files {
         static let baseWorldScene = Folder.assets3DFolder + "world.scn"
     }
+    
+    
 }

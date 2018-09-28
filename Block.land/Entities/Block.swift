@@ -43,7 +43,6 @@ final class Block: GKEntity {
             blockComponent.blockNode.position = coordinate.position
             blockComponent.blockNode.rotation = coordinate.rotation
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

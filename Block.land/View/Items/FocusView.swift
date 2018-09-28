@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FocusView: UIView {
+final class FocusView: UIView {
     
     // MARK: - Public Properties
     enum Status {
@@ -43,7 +43,6 @@ class FocusView: UIView {
     }
     
     // MARK: - Override
-    
     override func draw(_ rect: CGRect) {
         
         // Corner radius

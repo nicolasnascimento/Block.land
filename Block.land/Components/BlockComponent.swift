@@ -22,7 +22,7 @@ final class BlockComponent: GKComponent {
         
         // Handy cases
         static var random: BlockMaterialType {
-            switch arc4random_uniform(4) {
+            switch GKRandomDistribution(lowestValue: 0, highestValue: 3).nextInt() {
             case 0: return .lightOrange
             case 1: return .darkOrange
             case 2: return .darkBrown
