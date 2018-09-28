@@ -203,7 +203,7 @@ extension Coordinator: EntityManagerDelegate {
         if let blockComponent = entity.component(ofType: BlockComponent.self) {
             print("adding block node")
             
-            let cubeSide = fabs(blockComponent.blockNode.boundingBox.max.x - blockComponent.blockNode.boundingBox.min.x)
+            let cubeSide = abs(blockComponent.blockNode.boundingBox.max.x - blockComponent.blockNode.boundingBox.min.x)
             blockComponent.blockNode.position.y += cubeSide
             
             self.add(blockComponent.blockNode)
